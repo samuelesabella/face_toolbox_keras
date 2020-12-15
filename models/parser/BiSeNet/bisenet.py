@@ -53,9 +53,15 @@ def feature_fusion_block(x1, x2):
 
 def upsampling(x, shape, interpolation="nearest"):    
     if interpolation == "nearest":
-        return Lambda(lambda t: tf.image.resize_nearest_neighbor(t, shape, align_corners=True))(x)
+        # Tensorfow 2.0 fix ----- #
+        # return Lambda(lambda t: tf.image.resize_nearest_neighbor(t, shape, align_corners=True))(x)
+        return Lambda(lambda t: tf.image.resize(t, shape))(x)
+        # ----------------------- #
     elif interpolation == "bilinear":
-        return Lambda(lambda t: tf.image.resize_bilinear(t, shape, align_corners=True))(x)
+        # Tensorfow 2.0 fix ----- #
+        # return Lambda(lambda t: tf.image.resize_bilinear(t, shape, align_corners=True))(x)
+        return Lambda(lambda t: tf.image.resize(t, shape))(x)
+        # ----------------------- #
 
 def maxpool(x, k=3, s=2, pad=1):
     x = ZeroPadding2D(pad)(x)
