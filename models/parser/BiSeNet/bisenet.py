@@ -1,5 +1,5 @@
-from keras.layers import *
-from keras.models import Model
+from tensorflow.keras.layers import *
+from tensorflow.keras.models import Model
 import tensorflow as tf
 
 def conv_block(x, f, k, s=1, block_name="", layer_id="", use_activ=True):
